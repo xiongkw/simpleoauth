@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloud.ecloud.oauthz.dao.IOauthCodeDao">
+
+  <select id="getLatestCodeByAppKey" parameterType="string" resultType="OAuthCode">
+    SELECT * from oauth_code
+    WHERE app_key=#{arg0}
+    ORDER BY create_time DESC
+    limit 0,1
+  </select>
+
+  <select id="selectByCode" parameterType="string" resultType="OAuthCode">
+    SELECT * from oauth_code
+    WHERE code=#{arg0}
+    limit 0,1
+  </select>
+
+  <update id="handleExpiredCode" parameterType="timestamp">
+    INSERT INTO oauth_code_history
+    SELECT * FROM oauth_code
+    WHERE (create_time + expires_in) &lt; #{arg0};
+    DELETE FROM oauth_code
+    WHERE (create_time + expires_in) &lt; #{arg0};
+  </update>
+</mapper>

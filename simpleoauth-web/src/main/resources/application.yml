@@ -1,0 +1,9 @@
+server:
+  port: 8777
+
+spring:
+  application:
+    name: cloud-ecloud-oauthweb
+  cloud:
+    zookeeper:
+      connectString: "127.0.0.1:2181"

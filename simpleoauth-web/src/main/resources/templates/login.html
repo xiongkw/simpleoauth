@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Oauth</title>
+</head>
+<body>
+    <h3 th:text="${session.appInfo.app_name}"></h3>
+    <img th:src="${session.appInfo.image_url}"/>
+    <form action="login" method="post">
+        用户名：<input name="username"><br>
+        密码：<input name="password"><br>
+        <input type="submit" value="登录">
+    </form>
+</body>
+</html>

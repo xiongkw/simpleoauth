@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloud.ecloud.oauthz.mapper.SysParamMapper">
+  <resultMap id="BaseResultMap" type="com.cloud.ecloud.oauthz.entity.SysParam">
+    <id column="sys_param_id" jdbcType="BIGINT" property="sys_param_id" />
+    <result column="sys_param_name" jdbcType="VARCHAR" property="sys_param_name" />
+    <result column="sys_param_value" jdbcType="VARCHAR" property="sys_param_value" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
+    <result column="enable" jdbcType="TINYINT" property="enable" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    sys_param_id, sys_param_name, sys_param_value, create_time, enable, description
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_param
+    where sys_param_id = #{sys_param_id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sys_param
+    where sys_param_id = #{sys_param_id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.cloud.ecloud.oauthz.entity.SysParam">
+    insert into sys_param (sys_param_id, sys_param_name, sys_param_value, 
+      create_time, enable, description
+      )
+    values (#{sys_param_id,jdbcType=BIGINT}, #{sys_param_name,jdbcType=VARCHAR}, #{sys_param_value,jdbcType=VARCHAR}, 
+      #{create_time,jdbcType=TIMESTAMP}, #{enable,jdbcType=TINYINT}, #{description,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cloud.ecloud.oauthz.entity.SysParam">
+    insert into sys_param
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sys_param_id != null">
+        sys_param_id,
+      </if>
+      <if test="sys_param_name != null">
+        sys_param_name,
+      </if>
+      <if test="sys_param_value != null">
+        sys_param_value,
+      </if>
+      <if test="create_time != null">
+        create_time,
+      </if>
+      <if test="enable != null">
+        enable,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sys_param_id != null">
+        #{sys_param_id,jdbcType=BIGINT},
+      </if>
+      <if test="sys_param_name != null">
+        #{sys_param_name,jdbcType=VARCHAR},
+      </if>
+      <if test="sys_param_value != null">
+        #{sys_param_value,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null">
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enable != null">
+        #{enable,jdbcType=TINYINT},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cloud.ecloud.oauthz.entity.SysParam">
+    update sys_param
+    <set>
+      <if test="sys_param_name != null">
+        sys_param_name = #{sys_param_name,jdbcType=VARCHAR},
+      </if>
+      <if test="sys_param_value != null">
+        sys_param_value = #{sys_param_value,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null">
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enable != null">
+        enable = #{enable,jdbcType=TINYINT},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sys_param_id = #{sys_param_id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cloud.ecloud.oauthz.entity.SysParam">
+    update sys_param
+    set sys_param_name = #{sys_param_name,jdbcType=VARCHAR},
+      sys_param_value = #{sys_param_value,jdbcType=VARCHAR},
+      create_time = #{create_time,jdbcType=TIMESTAMP},
+      enable = #{enable,jdbcType=TINYINT},
+      description = #{description,jdbcType=VARCHAR}
+    where sys_param_id = #{sys_param_id,jdbcType=BIGINT}
+  </update>
+</mapper>
